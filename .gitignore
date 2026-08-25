@@ -1,0 +1,21 @@
+# ─── OS / Editor junk ───────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# ─── Secrets (if you ever switch to a private/service-role key) ─────
+# .env is committed here because it only contains a publishable anon key.
+# If you ever add a SERVICE_ROLE_KEY or any private secret, uncomment below:
+.env
+
+# ─── Logs ───────────────────────────────────────────────────────────
+*.log
+npm-debug.log*
+
+# ─── Node (if you add a build step later) ───────────────────────────
+node_modules/
+dist/
+.cache/
