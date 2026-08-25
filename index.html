@@ -716,8 +716,24 @@
   </div>
 </div>
 
-<script src="config.js"></script>
+<!-- <script src="config.js"></script> -->
 <script>
+
+let SUPABASE_URL;
+let SUPABASE_KEY;
+
+async function loadConfig() {
+  const res = await fetch('/api/config');
+
+  if (!res.ok) {
+    throw new Error('Failed to load Supabase configuration');
+  }
+
+  const config = await res.json();
+
+  SUPABASE_URL = config.supabaseUrl;
+  SUPABASE_KEY = config.supabaseKey;
+}
 
 const fmtINR = n => n == null ? '—' : '₹' + Number(n).toLocaleString('en-IN', { maximumFractionDigits: 0 });
 const fmtNum = n => n == null ? '—' : Number(n).toLocaleString('en-IN');
@@ -988,7 +1004,16 @@ document.getElementById('refreshBtn').addEventListener('click', load);
 dateInput.addEventListener('change', load);
 
 setStatus('loading', 'loading chart library…');
-window.chartReady.finally(load);
+window.chartReady.finally(async () => {
+  try {
+    await loadConfig();
+    await load();
+  } catch (err) {
+    console.error(err);
+    renderError(err);
+    setStatus('error', 'config error');
+  }
+});
 </script>
 
 </body>

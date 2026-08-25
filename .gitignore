@@ -2,7 +2,7 @@
 .env
 .env.local
 .env.*.local
-config.js
+/config.js
 
 # Node modules / build output (if applicable)
 node_modules/
