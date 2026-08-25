@@ -723,7 +723,7 @@ let SUPABASE_URL;
 let SUPABASE_KEY;
 
 async function loadConfig() {
-  const res = await fetch('/api/config');
+  const res = await fetch('/.netlify/functions/config');
 
   if (!res.ok) {
     throw new Error('Failed to load Supabase configuration');
